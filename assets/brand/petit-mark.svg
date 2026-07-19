@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title description">
+  <title id="title">Petit logo</title>
+  <desc id="description">A warm rounded mark with a heart-shaped paw</desc>
+  <defs>
+    <linearGradient id="background" x1="18" y1="14" x2="110" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F06B62" />
+      <stop offset="1" stop-color="#B83F55" />
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="34" fill="url(#background)" />
+  <circle cx="42" cy="45" r="10" fill="#FFF8F1" />
+  <circle cx="64" cy="36" r="10" fill="#FFF8F1" />
+  <circle cx="86" cy="45" r="10" fill="#FFF8F1" />
+  <path d="M64 99C45 86 34 76 34 64c0-9 7-16 16-16 6 0 11 3 14 8 3-5 8-8 14-8 9 0 16 7 16 16 0 12-11 22-30 35Z" fill="#FFF8F1" />
+</svg>

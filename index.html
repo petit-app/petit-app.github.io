@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Petit | Cuidado pet local-first e open source</title>
+    <meta
+      name="description"
+      content="Petit é um app Android open source para organizar a saúde e a rotina dos seus pets, com dados locais, backup no seu Google Drive e compartilhamento pela rede local."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://petit-app.github.io/" />
+
+    <meta property="og:title" content="Petit | Pet care that stays yours" />
+    <meta
+      property="og:description"
+      content="Local-first pet care, user-owned Google Drive backups, local sharing, and fully open-source code."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://petit-app.github.io/" />
+    <meta property="og:site_name" content="Petit" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:image" content="https://petit-app.github.io/assets/screenshots/hero-home.png" />
+    <meta property="og:image:alt" content="Petit pet-care dashboard" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Petit | Pet care that stays yours" />
+    <meta
+      name="twitter:description"
+      content="An open-source, local-first Android app for your pets' care routines."
+    />
+    <meta name="twitter:image" content="https://petit-app.github.io/assets/screenshots/hero-home.png" />
+    <meta name="theme-color" content="#FFF8F1" />
+
+    <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Petit",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Android",
+        "url": "https://petit-app.github.io/",
+        "codeRepository": "https://github.com/petit-app/petit",
+        "description": "Open-source, local-first pet care app with user-owned backups and local sharing.",
+        "license": "https://github.com/petit-app/petit/blob/main/LICENSE"
+      }
+    </script>
+
+    <style>
+      :root {
+        --ink: #302626;
+        --muted: #706364;
+        --brand: #c84758;
+        --brand-dark: #8f2d43;
+        --peach: #f38a70;
+        --cream: #fff8f1;
+        --paper: #fffdf9;
+        --sage: #54766a;
+        --sage-soft: #e2eee8;
+        --line: #eadbd4;
+        --warm: #f8e5dc;
+        --white: #ffffff;
+        --shadow-sm: 0 10px 30px rgba(91, 48, 48, 0.08);
+        --shadow-lg: 0 28px 70px rgba(91, 48, 48, 0.16);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 4% 4%, rgba(243, 138, 112, 0.18), transparent 28rem),
+          radial-gradient(circle at 96% 14%, rgba(84, 118, 106, 0.12), transparent 25rem),
+          var(--cream);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 100;
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: var(--ink);
+        color: var(--white);
+        transform: translateY(-160%);
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--sage);
+        outline-offset: 3px;
+      }
+
+      .shell {
+        width: min(1160px, calc(100% - 40px));
+        margin-inline: auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+        background: color-mix(in srgb, var(--cream) 88%, transparent);
+        backdrop-filter: blur(16px);
+      }
+
+      .topbar-inner {
+        min-height: 74px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--brand-dark);
+        text-decoration: none;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 1.18rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .top-links,
+      .nav-links {
+        display: flex;
+        align-items: center;
+      }
+
+      .top-links {
+        gap: 18px;
+      }
+
+      .nav-links {
+        gap: 22px;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      .nav-links a:hover {
+        color: var(--brand-dark);
+      }
+
+      .lang-toggle {
+        display: inline-flex;
+        padding: 3px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--paper);
+      }
+
+      .lang-button {
+        min-width: 44px;
+        padding: 7px 9px;
+        border: 0;
+        border-radius: 999px;
+        color: var(--muted);
+        background: transparent;
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      .lang-button[aria-pressed="true"] {
+        color: var(--white);
+        background: var(--brand-dark);
+      }
+
+      .hero {
+        min-height: calc(100vh - 74px);
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+        align-items: center;
+        gap: clamp(40px, 7vw, 90px);
+        padding-block: 74px 84px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border: 1px solid rgba(200, 71, 88, 0.22);
+        border-radius: 999px;
+        color: var(--brand-dark);
+        background: rgba(255, 255, 255, 0.62);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--peach);
+        content: "";
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-top: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.12;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin-block: 22px 18px;
+        color: var(--brand-dark);
+        font-size: clamp(2.75rem, 6vw, 5.7rem);
+        letter-spacing: -0.055em;
+      }
+
+      h1 span {
+        color: var(--sage);
+      }
+
+      h2 {
+        margin-bottom: 14px;
+        color: var(--brand-dark);
+        font-size: clamp(2rem, 4.2vw, 3.5rem);
+        letter-spacing: -0.045em;
+      }
+
+      h3 {
+        margin-bottom: 8px;
+        font-size: 1.12rem;
+      }
+
+      .hero-copy > p {
+        max-width: 620px;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(1.03rem, 1.7vw, 1.2rem);
+      }
+
+      .hero-actions,
+      .cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 19px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 800;
+        transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button-primary {
+        color: var(--white);
+        background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+        box-shadow: 0 12px 28px rgba(143, 45, 67, 0.25);
+      }
+
+      .button-secondary {
+        border-color: var(--line);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .hero-note {
+        margin-top: 20px !important;
+        color: var(--muted);
+        font-size: 0.84rem !important;
+      }
+
+      .device-stage {
+        position: relative;
+        min-height: 590px;
+        display: grid;
+        place-items: center;
+      }
+
+      .device-stage::before,
+      .device-stage::after {
+        position: absolute;
+        border-radius: 50%;
+        content: "";
+      }
+
+      .device-stage::before {
+        inset: 10% 0 2% 8%;
+        border-radius: 44% 56% 48% 52%;
+        background: linear-gradient(145deg, var(--warm), var(--sage-soft));
+        transform: rotate(-5deg);
+      }
+
+      .device-stage::after {
+        width: 90px;
+        height: 90px;
+        top: 7%;
+        right: 3%;
+        border: 18px solid rgba(200, 71, 88, 0.12);
+      }
+
+      .phone {
+        position: relative;
+        z-index: 1;
+        width: min(330px, 82vw);
+        padding: 12px;
+        border: 2px solid rgba(48, 38, 38, 0.12);
+        border-radius: 42px;
+        background: #2d292a;
+        box-shadow: var(--shadow-lg);
+        transform: rotate(2deg);
+      }
+
+      .phone-screen {
+        position: relative;
+        aspect-ratio: 9 / 19;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        border-radius: 32px;
+        background:
+          linear-gradient(160deg, rgba(243, 138, 112, 0.25), transparent 38%),
+          var(--paper);
+      }
+
+      .phone-screen img,
+      .gallery-frame img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+      }
+
+      .placeholder {
+        max-width: 220px;
+        padding: 22px;
+        text-align: center;
+      }
+
+      .placeholder-mark {
+        width: 58px;
+        height: 58px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 16px;
+        border-radius: 18px;
+        color: var(--white);
+        background: linear-gradient(135deg, var(--peach), var(--brand));
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 800;
+      }
+
+      .placeholder strong {
+        display: block;
+        color: var(--brand-dark);
+      }
+
+      .placeholder small {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+      }
+
+      .floating-chip {
+        position: absolute;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 11px 14px;
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        background: rgba(255, 253, 249, 0.94);
+        box-shadow: var(--shadow-sm);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      .floating-chip:first-of-type {
+        top: 22%;
+        left: -2%;
+      }
+
+      .floating-chip:last-of-type {
+        right: -3%;
+        bottom: 15%;
+      }
+
+      .chip-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--sage);
+      }
+
+      section:not(.hero) {
+        padding-block: 84px;
+      }
+
+      .section-heading {
+        max-width: 720px;
+        margin-bottom: 36px;
+      }
+
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.04rem;
+      }
+
+      .pillars {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .pillar {
+        position: relative;
+        overflow: hidden;
+        min-height: 290px;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: color-mix(in srgb, var(--paper) 88%, var(--warm));
+        box-shadow: var(--shadow-sm);
+      }
+
+      .pillar::after {
+        position: absolute;
+        width: 130px;
+        height: 130px;
+        right: -48px;
+        bottom: -52px;
+        border-radius: 50%;
+        background: var(--accent, var(--warm));
+        opacity: 0.55;
+        content: "";
+      }
+
+      .pillar-index {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 44px;
+        border-radius: 15px;
+        color: var(--brand-dark);
+        background: var(--accent, var(--warm));
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-weight: 800;
+      }
+
+      .pillar p,
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .features-section {
+        position: relative;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .feature {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+        padding: 23px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.64);
+      }
+
+      .feature-icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 15px;
+        color: var(--brand-dark);
+        background: var(--warm);
+        font-weight: 800;
+      }
+
+      .feature h3 {
+        margin-top: 2px;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .gallery-card {
+        margin: 0;
+      }
+
+      .gallery-frame {
+        position: relative;
+        aspect-ratio: 9 / 18;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        border: 8px solid var(--paper);
+        border-radius: 28px;
+        background: var(--warm);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .gallery-card:nth-child(even) .gallery-frame {
+        background: var(--sage-soft);
+        transform: translateY(24px);
+      }
+
+      .gallery-card figcaption {
+        margin-top: 14px;
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .privacy-band {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 40px;
+        padding: clamp(28px, 5vw, 56px);
+        border-radius: 34px;
+        color: var(--white);
+        background:
+          radial-gradient(circle at 90% 0, rgba(255, 255, 255, 0.14), transparent 38%),
+          linear-gradient(135deg, #40685d, #294b44);
+      }
+
+      .privacy-band h2 {
+        color: var(--white);
+      }
+
+      .privacy-band p {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .privacy-list {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .privacy-list li {
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.08);
+        font-weight: 700;
+      }
+
+      .cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        margin-block: 80px;
+        padding: 36px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: linear-gradient(120deg, var(--warm), var(--paper));
+      }
+
+      .cta h2 {
+        margin-bottom: 8px;
+        font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+      }
+
+      .cta p {
+        max-width: 620px;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .cta-actions {
+        flex-shrink: 0;
+        margin-top: 0;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding-block: 28px 36px;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+      }
+
+      .footer-links a {
+        font-weight: 700;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      .js .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      .js .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 560ms ease, transform 560ms ease;
+      }
+
+      @media (max-width: 920px) {
+        .hero {
+          min-height: auto;
+          grid-template-columns: 1fr;
+        }
+
+        .hero-copy {
+          text-align: center;
+        }
+
+        .hero-copy > p,
+        .section-heading {
+          margin-inline: auto;
+        }
+
+        .hero-actions {
+          justify-content: center;
+        }
+
+        .device-stage {
+          min-height: 560px;
+        }
+
+        .pillars {
+          grid-template-columns: 1fr;
+        }
+
+        .pillar {
+          min-height: 0;
+        }
+
+        .pillar-index {
+          margin-bottom: 28px;
+        }
+
+        .gallery {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .gallery-card:nth-child(even) .gallery-frame {
+          transform: none;
+        }
+
+        .privacy-band {
+          grid-template-columns: 1fr;
+        }
+
+        .cta {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .shell {
+          width: min(100% - 28px, 1160px);
+        }
+
+        .topbar-inner {
+          min-height: 66px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-block: 52px 64px;
+        }
+
+        h1 {
+          font-size: clamp(2.55rem, 14vw, 4rem);
+        }
+
+        .hero-actions,
+        .cta-actions {
+          width: 100%;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .device-stage {
+          min-height: 500px;
+        }
+
+        .floating-chip {
+          font-size: 0.72rem;
+        }
+
+        section:not(.hero) {
+          padding-block: 62px;
+        }
+
+        .feature-grid,
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-frame {
+          width: min(300px, 88vw);
+          margin-inline: auto;
+        }
+
+        .privacy-band,
+        .cta {
+          padding: 26px;
+          border-radius: 24px;
+        }
+
+        .footer-inner {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+
+        .js .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skipLink">Ir para o conteúdo</a>
+
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="brand" href="#top" aria-label="Petit home">
+          <img src="assets/brand/petit-mark.svg" alt="" />
+          <span>Petit</span>
+        </a>
+
+        <div class="top-links">
+          <nav class="nav-links" aria-label="Navegação principal" data-i18n-aria="mainNavigation">
+            <a href="#freedom" data-i18n="navFreedom">Liberdade</a>
+            <a href="#features" data-i18n="navFeatures">Recursos</a>
+            <a href="#screens" data-i18n="navScreens">Telas</a>
+            <a href="/privacy-policy/" data-i18n="navPrivacy">Privacidade</a>
+          </nav>
+          <div class="lang-toggle" role="group" aria-label="Idioma" data-i18n-aria="languageSelector">
+            <button class="lang-button" id="lang-pt" type="button" aria-pressed="true">PT</button>
+            <button class="lang-button" id="lang-en" type="button" aria-pressed="false">EN</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" id="top">
+        <div class="hero-copy reveal">
+          <span class="eyebrow" data-i18n="eyebrow">Android · local-first · open source</span>
+          <h1 data-i18n-html="heroTitle">O cuidado dos seus pets. <span>Nas suas mãos.</span></h1>
+          <p data-i18n="heroBody">
+            Organize saúde, rotina e lembretes com um app que funciona offline, mantém seus dados por perto e não cobra assinatura mensal pelos recursos locais essenciais.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-primary"
+              href="https://github.com/petit-app/petit"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="viewGitHub"
+              >Ver no GitHub</a
+            >
+            <a class="button button-secondary" href="#freedom" data-i18n="understandPetit">Conhecer o Petit</a>
+          </div>
+          <p class="hero-note" data-i18n="heroNote">
+            Recursos hospedados futuros podem ter condições próprias. A promessa aqui cobre o Petit Local, o backup no Drive do usuário e o compartilhamento local.
+          </p>
+        </div>
+
+        <div class="device-stage reveal" role="group" aria-label="Prévia do aplicativo" data-i18n-aria="appPreview">
+          <div class="floating-chip"><span class="chip-dot"></span><span data-i18n="offlineChip">Funciona offline</span></div>
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="placeholder" aria-hidden="true">
+                <div class="placeholder-mark">P</div>
+                <strong data-i18n="dashboardPlaceholder">Painel dos seus pets</strong>
+                <small>assets/screenshots/hero-home.png</small>
+              </div>
+              <img
+                src="assets/screenshots/hero-home.png"
+                alt="Painel principal do Petit"
+                data-i18n-alt="dashboardAlt"
+                onerror="this.hidden=true"
+              />
+            </div>
+          </div>
+          <div class="floating-chip"><span class="chip-dot"></span><span data-i18n="openChip">Código aberto</span></div>
+        </div>
+      </section>
+
+      <section class="shell" id="freedom">
+        <div class="section-heading reveal">
+          <span class="eyebrow" data-i18n="freedomEyebrow">Liberdade de verdade</span>
+          <h2 data-i18n="freedomTitle">Seus dados não precisam morar nos nossos servidores.</h2>
+          <p data-i18n="freedomBody">
+            O Petit foi desenhado para continuar útil sem uma conta Petit, sem internet constante e sem prender sua rotina a uma assinatura.
+          </p>
+        </div>
+
+        <div class="pillars">
+          <article class="pillar reveal" style="--accent: var(--warm)">
+            <div class="pillar-index" aria-hidden="true">01</div>
+            <h3 data-i18n="pillarLocalTitle">Local por padrão</h3>
+            <p data-i18n="pillarLocalBody">
+              Os recursos essenciais usam o armazenamento do seu aparelho e funcionam offline. Sem mensalidade para cuidar, registrar e consultar a rotina.
+            </p>
+          </article>
+          <article class="pillar reveal" style="--accent: var(--sage-soft)">
+            <div class="pillar-index" aria-hidden="true">02</div>
+            <h3 data-i18n="pillarDriveTitle">Seu próprio Google Drive</h3>
+            <p data-i18n="pillarDriveBody">
+              Cada pessoa autoriza a própria conta. Os backups ficam no appDataFolder oculto do próprio Google Drive, sem passar por servidores do Petit.
+            </p>
+          </article>
+          <article class="pillar reveal" style="--accent: #f3e2c6">
+            <div class="pillar-index" aria-hidden="true">03</div>
+            <h3 data-i18n="pillarSharingTitle">Compartilhamento por perto</h3>
+            <p data-i18n="pillarSharingBody">
+              Compartilhe pela rede local com dispositivos próximos, sem depender de internet ou infraestrutura hospedada pela Petit.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="features-section shell" id="features">
+        <div class="section-heading reveal">
+          <span class="eyebrow" data-i18n="featuresEyebrow">Tudo em um só lugar</span>
+          <h2 data-i18n="featuresTitle">Menos planilhas. Mais clareza na rotina.</h2>
+          <p data-i18n="featuresBody">
+            Um espaço prático para acompanhar diferentes pets e manter informações importantes organizadas.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature reveal">
+            <div class="feature-icon" aria-hidden="true">01</div>
+            <div>
+              <h3 data-i18n="featureProfilesTitle">Perfis para seus pets</h3>
+              <p data-i18n="featureProfilesBody">Organize cães, gatos e outros companheiros sem limitar o cuidado a uma única espécie.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-icon" aria-hidden="true">02</div>
+            <div>
+              <h3 data-i18n="featureHealthTitle">Histórico de saúde</h3>
+              <p data-i18n="featureHealthBody">Acompanhe peso, vacinas e vermifugação com datas e histórico fáceis de consultar.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-icon" aria-hidden="true">03</div>
+            <div>
+              <h3 data-i18n="featureRoutineTitle">Tarefas e lembretes</h3>
+              <p data-i18n="featureRoutineBody">Transforme cuidados recorrentes em uma rotina simples, visível e confiável.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-icon" aria-hidden="true">04</div>
+            <div>
+              <h3 data-i18n="featureBackupTitle">Backup e restauração</h3>
+              <p data-i18n="featureBackupBody">Leve uma cópia portátil dos dados e restaure com validação de formato e integridade.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-icon" aria-hidden="true">05</div>
+            <div>
+              <h3 data-i18n="featureSharingTitle">Cuidado compartilhado</h3>
+              <p data-i18n="featureSharingBody">Conecte dispositivos próximos para que mais de uma pessoa participe da rotina localmente.</p>
+            </div>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-icon" aria-hidden="true">06</div>
+            <div>
+              <h3 data-i18n="featureSourceTitle">Open source de ponta a ponta</h3>
+              <p data-i18n="featureSourceBody">Leia o código, acompanhe decisões, reporte problemas e contribua com o projeto público.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="shell" id="screens">
+        <div class="section-heading reveal">
+          <span class="eyebrow" data-i18n="screensEyebrow">Feito para o dia a dia</span>
+          <h2 data-i18n="screensTitle">Uma experiência calma e direta.</h2>
+          <p data-i18n="screensBody">
+            Telas reais do Petit executado em um emulador Android com dados demonstrativos.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <figure class="gallery-card reveal">
+            <div class="gallery-frame">
+              <div class="placeholder" aria-hidden="true"><div class="placeholder-mark">01</div><small>assets/screenshots/hero-home.png</small></div>
+              <img src="assets/screenshots/hero-home.png" alt="Painel principal do Petit" data-i18n-alt="dashboardAlt" loading="lazy" onerror="this.hidden=true" />
+            </div>
+            <figcaption data-i18n="screenDashboard">Visão geral</figcaption>
+          </figure>
+          <figure class="gallery-card reveal">
+            <div class="gallery-frame">
+              <div class="placeholder" aria-hidden="true"><div class="placeholder-mark">02</div><small>assets/screenshots/pet-care.png</small></div>
+              <img src="assets/screenshots/pet-care.png" alt="Histórico de peso de um pet no Petit" data-i18n-alt="profileAlt" loading="lazy" onerror="this.hidden=true" />
+            </div>
+            <figcaption data-i18n="screenProfile">Cuidados do pet</figcaption>
+          </figure>
+          <figure class="gallery-card reveal">
+            <div class="gallery-frame">
+              <div class="placeholder" aria-hidden="true"><div class="placeholder-mark">03</div><small>assets/screenshots/drive-backup.png</small></div>
+              <img src="assets/screenshots/drive-backup.png" alt="Backup no Google Drive no Petit" data-i18n-alt="healthAlt" loading="lazy" onerror="this.hidden=true" />
+            </div>
+            <figcaption data-i18n="screenHealth">Backup no Drive</figcaption>
+          </figure>
+          <figure class="gallery-card reveal">
+            <div class="gallery-frame">
+              <div class="placeholder" aria-hidden="true"><div class="placeholder-mark">04</div><small>assets/screenshots/local-sharing.png</small></div>
+              <img src="assets/screenshots/local-sharing.png" alt="Compartilhamento local no Petit" data-i18n-alt="backupAlt" loading="lazy" onerror="this.hidden=true" />
+            </div>
+            <figcaption data-i18n="screenBackup">Compartilhamento local</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="shell" id="privacy">
+        <div class="privacy-band reveal">
+          <div>
+            <span class="eyebrow" data-i18n="privacyEyebrow">Privacidade sem atalhos</span>
+            <h2 data-i18n="privacyTitle">Transparência que você pode verificar.</h2>
+            <p data-i18n="privacyBody">
+              O modelo local-first reduz dependências externas. Quando você usa o Google Drive, a autorização é da sua conta e o escopo é limitado aos dados privados do app.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-secondary" href="/privacy-policy/" data-i18n="readPrivacy">Ler política de privacidade</a>
+            </div>
+          </div>
+          <ul class="privacy-list">
+            <li data-i18n="privacyItemOne">Dados locais continuam úteis sem login</li>
+            <li data-i18n="privacyItemTwo">Backup no appDataFolder de cada usuário</li>
+            <li data-i18n="privacyItemThree">Sem tokens dentro dos arquivos de backup</li>
+            <li data-i18n="privacyItemFour">Código público e auditável</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cta shell reveal">
+        <div>
+          <h2 data-i18n="ctaTitle">Petit é construído em público.</h2>
+          <p data-i18n="ctaBody">Acompanhe o desenvolvimento, abra uma issue ou ajude a criar uma experiência melhor para pets e cuidadores.</p>
+        </div>
+        <div class="cta-actions">
+          <a
+            class="button button-primary"
+            href="https://github.com/petit-app/petit"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="openRepository"
+            >Abrir repositório</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <span data-i18n="footerText">Petit · cuidado pet local-first e open source.</span>
+        <div class="footer-links">
+          <a href="/privacy-policy/" data-i18n="navPrivacy">Privacidade</a>
+          <a href="https://github.com/petit-app/petit" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        "pt-BR": {
+          pageTitle: "Petit | Cuidado pet local-first e open source",
+          pageDescription: "Petit é um app Android open source para organizar a saúde e a rotina dos seus pets, com dados locais, backup no seu Google Drive e compartilhamento pela rede local.",
+          skipLink: "Ir para o conteúdo",
+          mainNavigation: "Navegação principal",
+          languageSelector: "Idioma",
+          navFreedom: "Liberdade",
+          navFeatures: "Recursos",
+          navScreens: "Telas",
+          navPrivacy: "Privacidade",
+          eyebrow: "Android · local-first · open source",
+          heroTitle: "O cuidado dos seus pets. <span>Nas suas mãos.</span>",
+          heroBody: "Organize saúde, rotina e lembretes com um app que funciona offline, mantém seus dados por perto e não cobra assinatura mensal pelos recursos locais essenciais.",
+          viewGitHub: "Ver no GitHub",
+          understandPetit: "Conhecer o Petit",
+          heroNote: "Recursos hospedados futuros podem ter condições próprias. A promessa aqui cobre o Petit Local, o backup no Drive do usuário e o compartilhamento local.",
+          appPreview: "Prévia do aplicativo",
+          offlineChip: "Funciona offline",
+          openChip: "Código aberto",
+          dashboardPlaceholder: "Painel dos seus pets",
+          dashboardAlt: "Painel principal do Petit",
+          freedomEyebrow: "Liberdade de verdade",
+          freedomTitle: "Seus dados não precisam morar nos nossos servidores.",
+          freedomBody: "O Petit foi desenhado para continuar útil sem uma conta Petit, sem internet constante e sem prender sua rotina a uma assinatura.",
+          pillarLocalTitle: "Local por padrão",
+          pillarLocalBody: "Os recursos essenciais usam o armazenamento do seu aparelho e funcionam offline. Sem mensalidade para cuidar, registrar e consultar a rotina.",
+          pillarDriveTitle: "Seu próprio Google Drive",
+          pillarDriveBody: "Cada pessoa autoriza a própria conta. Os backups ficam no appDataFolder oculto do próprio Google Drive, sem passar por servidores do Petit.",
+          pillarSharingTitle: "Compartilhamento por perto",
+          pillarSharingBody: "Compartilhe pela rede local com dispositivos próximos, sem depender de internet ou infraestrutura hospedada pela Petit.",
+          featuresEyebrow: "Tudo em um só lugar",
+          featuresTitle: "Menos planilhas. Mais clareza na rotina.",
+          featuresBody: "Um espaço prático para acompanhar diferentes pets e manter informações importantes organizadas.",
+          featureProfilesTitle: "Perfis para seus pets",
+          featureProfilesBody: "Organize cães, gatos e outros companheiros sem limitar o cuidado a uma única espécie.",
+          featureHealthTitle: "Histórico de saúde",
+          featureHealthBody: "Acompanhe peso, vacinas e vermifugação com datas e histórico fáceis de consultar.",
+          featureRoutineTitle: "Tarefas e lembretes",
+          featureRoutineBody: "Transforme cuidados recorrentes em uma rotina simples, visível e confiável.",
+          featureBackupTitle: "Backup e restauração",
+          featureBackupBody: "Leve uma cópia portátil dos dados e restaure com validação de formato e integridade.",
+          featureSharingTitle: "Cuidado compartilhado",
+          featureSharingBody: "Conecte dispositivos próximos para que mais de uma pessoa participe da rotina localmente.",
+          featureSourceTitle: "Open source de ponta a ponta",
+          featureSourceBody: "Leia o código, acompanhe decisões, reporte problemas e contribua com o projeto público.",
+          screensEyebrow: "Feito para o dia a dia",
+          screensTitle: "Uma experiência calma e direta.",
+          screensBody: "Telas reais do Petit executado em um emulador Android com dados demonstrativos.",
+          profileAlt: "Histórico de peso de um pet no Petit",
+          healthAlt: "Backup no Google Drive no Petit",
+          backupAlt: "Compartilhamento local no Petit",
+          screenDashboard: "Visão geral",
+          screenProfile: "Cuidados do pet",
+          screenHealth: "Backup no Drive",
+          screenBackup: "Compartilhamento local",
+          privacyEyebrow: "Privacidade sem atalhos",
+          privacyTitle: "Transparência que você pode verificar.",
+          privacyBody: "O modelo local-first reduz dependências externas. Quando você usa o Google Drive, a autorização é da sua conta e o escopo é limitado aos dados privados do app.",
+          readPrivacy: "Ler política de privacidade",
+          privacyItemOne: "Dados locais continuam úteis sem login",
+          privacyItemTwo: "Backup no appDataFolder de cada usuário",
+          privacyItemThree: "Sem tokens dentro dos arquivos de backup",
+          privacyItemFour: "Código público e auditável",
+          ctaTitle: "Petit é construído em público.",
+          ctaBody: "Acompanhe o desenvolvimento, abra uma issue ou ajude a criar uma experiência melhor para pets e cuidadores.",
+          openRepository: "Abrir repositório",
+          footerText: "Petit · cuidado pet local-first e open source."
+        },
+        en: {
+          pageTitle: "Petit | Local-first, open-source pet care",
+          pageDescription: "Petit is an open-source Android app for pet health and care routines, with local data, backups in your own Google Drive, and local-network sharing.",
+          skipLink: "Skip to content",
+          mainNavigation: "Main navigation",
+          languageSelector: "Language",
+          navFreedom: "Freedom",
+          navFeatures: "Features",
+          navScreens: "Screens",
+          navPrivacy: "Privacy",
+          eyebrow: "Android · local-first · open source",
+          heroTitle: "Your pets' care. <span>In your hands.</span>",
+          heroBody: "Organize health records, routines, and reminders in an app that works offline, keeps your data close, and charges no monthly subscription for essential local features.",
+          viewGitHub: "View on GitHub",
+          understandPetit: "Discover Petit",
+          heroNote: "Future hosted services may have their own terms. This promise covers Petit Local, backups in the user's Drive, and local sharing.",
+          appPreview: "App preview",
+          offlineChip: "Works offline",
+          openChip: "Open source",
+          dashboardPlaceholder: "Your pets' dashboard",
+          dashboardAlt: "Petit main dashboard",
+          freedomEyebrow: "Freedom by design",
+          freedomTitle: "Your data does not need to live on our servers.",
+          freedomBody: "Petit is designed to stay useful without a Petit account, constant internet access, or a subscription tied to your daily routine.",
+          pillarLocalTitle: "Local by default",
+          pillarLocalBody: "Essential features use your device's storage and work offline. No monthly fee to record, review, and manage everyday care.",
+          pillarDriveTitle: "Your own Google Drive",
+          pillarDriveBody: "Each person authorizes their own account. Backups stay in the hidden appDataFolder of their own Google Drive and never pass through Petit servers.",
+          pillarSharingTitle: "Nearby sharing",
+          pillarSharingBody: "Share over the local network with nearby devices, without depending on the internet or Petit-hosted infrastructure.",
+          featuresEyebrow: "Everything in one place",
+          featuresTitle: "Fewer spreadsheets. A clearer routine.",
+          featuresBody: "A practical place to follow different pets and keep important information organized.",
+          featureProfilesTitle: "Profiles for your pets",
+          featureProfilesBody: "Organize dogs, cats, and other companions without limiting care to a single species.",
+          featureHealthTitle: "Health history",
+          featureHealthBody: "Follow weight, vaccinations, and deworming with dates and an easy-to-review history.",
+          featureRoutineTitle: "Tasks and reminders",
+          featureRoutineBody: "Turn recurring care into a routine that is simple, visible, and dependable.",
+          featureBackupTitle: "Backup and restore",
+          featureBackupBody: "Keep a portable copy of your data and restore it with format and integrity validation.",
+          featureSharingTitle: "Shared care",
+          featureSharingBody: "Connect nearby devices so more than one caregiver can take part in the routine locally.",
+          featureSourceTitle: "Open source end to end",
+          featureSourceBody: "Read the code, follow decisions, report problems, and contribute to the public project.",
+          screensEyebrow: "Made for everyday care",
+          screensTitle: "A calm, direct experience.",
+          screensBody: "Real Petit screens captured from an Android emulator with demonstration data.",
+          profileAlt: "A pet's weight history in Petit",
+          healthAlt: "Google Drive backup in Petit",
+          backupAlt: "Local sharing in Petit",
+          screenDashboard: "Overview",
+          screenProfile: "Pet care",
+          screenHealth: "Drive backup",
+          screenBackup: "Local sharing",
+          privacyEyebrow: "Privacy without shortcuts",
+          privacyTitle: "Transparency you can verify.",
+          privacyBody: "The local-first model reduces external dependencies. When you use Google Drive, authorization belongs to your account and the scope is limited to the app's private data.",
+          readPrivacy: "Read the privacy policy",
+          privacyItemOne: "Local data stays useful without sign-in",
+          privacyItemTwo: "Backups in each user's appDataFolder",
+          privacyItemThree: "No tokens inside backup files",
+          privacyItemFour: "Public, auditable source code",
+          ctaTitle: "Petit is built in public.",
+          ctaBody: "Follow development, open an issue, or help create a better experience for pets and caregivers.",
+          openRepository: "Open repository",
+          footerText: "Petit · local-first, open-source pet care."
+        }
+      };
+
+      function applyLanguage(language) {
+        const normalizedLanguage = language === "pt-BR" ? "pt-BR" : "en";
+        const current = translations[normalizedLanguage];
+
+        document.documentElement.lang = normalizedLanguage;
+        document.title = current.pageTitle;
+        document.querySelector('meta[name="description"]').setAttribute("content", current.pageDescription);
+
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+          const key = element.dataset.i18n;
+          if (current[key]) element.textContent = current[key];
+        });
+
+        document.querySelectorAll("[data-i18n-html]").forEach((element) => {
+          const key = element.dataset.i18nHtml;
+          if (current[key]) element.innerHTML = current[key];
+        });
+
+        document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+          const key = element.dataset.i18nAlt;
+          if (current[key]) element.setAttribute("alt", current[key]);
+        });
+
+        document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+          const key = element.dataset.i18nAria;
+          if (current[key]) element.setAttribute("aria-label", current[key]);
+        });
+
+        document.getElementById("lang-pt").setAttribute("aria-pressed", String(normalizedLanguage === "pt-BR"));
+        document.getElementById("lang-en").setAttribute("aria-pressed", String(normalizedLanguage === "en"));
+
+        try {
+          localStorage.setItem("petit-language", normalizedLanguage);
+        } catch (_) {
+          // Language persistence is optional when storage is unavailable.
+        }
+      }
+
+      let storedLanguage;
+      try {
+        storedLanguage = localStorage.getItem("petit-language");
+      } catch (_) {
+        storedLanguage = null;
+      }
+
+      const browserLanguage = navigator.language.startsWith("pt") ? "pt-BR" : "en";
+      applyLanguage(storedLanguage || browserLanguage);
+
+      document.getElementById("lang-pt").addEventListener("click", () => applyLanguage("pt-BR"));
+      document.getElementById("lang-en").addEventListener("click", () => applyLanguage("en"));
+
+      if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+
+        document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+      } else {
+        document.querySelectorAll(".reveal").forEach((element) => element.classList.add("visible"));
+      }
+    </script>
+  </body>
+</html>

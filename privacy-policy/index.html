@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Petit privacy policy in English and Brazilian Portuguese."
+    />
+    <title>Petit Privacy Policy | Política de Privacidade do Petit</title>
+    <link rel="canonical" href="https://petit-app.github.io/privacy-policy/" />
+    <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg" />
+    <style>
+      :root {
+        --background: #f5f4ef;
+        --paper: #fffef9;
+        --text: #1f2a2e;
+        --muted: #4d5e63;
+        --accent: #1f8a70;
+        --line: #d9ddd4;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: radial-gradient(circle at top, #e8efe6, var(--background));
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+
+      .container {
+        width: min(900px, calc(100% - 32px));
+        margin: 40px auto;
+      }
+
+      article {
+        margin-bottom: 24px;
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--paper);
+        box-shadow: 0 10px 30px rgba(31, 42, 46, 0.08);
+      }
+
+      h1,
+      h2 {
+        line-height: 1.25;
+      }
+
+      h1 {
+        margin-top: 0;
+        color: var(--accent);
+      }
+
+      h2 {
+        margin-top: 28px;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      code {
+        overflow-wrap: anywhere;
+      }
+
+      .language-links,
+      .meta {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .language-links {
+        margin: 0 0 20px;
+        text-align: center;
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          width: min(100% - 24px, 900px);
+          margin: 16px auto;
+        }
+
+        article {
+          padding: 20px;
+          border-radius: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <nav class="language-links" aria-label="Language navigation">
+        <a href="/">Petit</a> · <a href="#english">English</a> ·
+        <a href="#portugues">Português (Brasil)</a>
+      </nav>
+
+      <article id="english" lang="en">
+        <h1>Petit Privacy Policy</h1>
+        <p class="meta"><strong>Effective date:</strong> July 19, 2026</p>
+
+        <p>
+          Petit is an open-source Android app for managing pet health and care information. This
+          policy explains what data Petit processes, where it goes, and the choices available to
+          you. Petit does not require a Petit account for the features described here.
+        </p>
+
+        <h2>1. Data you provide and data created by the app</h2>
+        <p>Depending on the features you use, Petit may process:</p>
+        <ul>
+          <li>Pet profiles, including names, species, notes, and app-owned photos.</li>
+          <li>Weight, vaccination, deworming, and other care records.</li>
+          <li>Tasks, reminders, completion state, and notification preferences.</li>
+          <li>App preferences, backup settings, and non-clinical backup status history.</li>
+          <li>
+            Device, family-group, pairing, and synchronization identifiers needed for optional
+            device-to-device sharing.
+          </li>
+        </ul>
+
+        <h2>2. Local storage</h2>
+        <p>
+          Petit is local-first. The app stores its primary records in an on-device Room database.
+          Preferences and operational settings are stored in Android DataStore or private app
+          storage, and app-owned photos and temporary working files are stored in app-controlled
+          device directories. Petit does not send this data to a Petit-operated backend merely
+          because you use the app.
+        </p>
+
+        <h2>3. Optional local and offline sharing</h2>
+        <p>
+          If you choose pairing, one-time transfer, or family-group synchronization, Petit sends
+          the selected restorable data directly between devices through Google Nearby Connections
+          or an authenticated connection on the local network. Nearby Connections may use
+          Bluetooth, Wi-Fi, Wi-Fi Direct, and Google Play services to discover and connect nearby
+          devices. Local-network synchronization uses local network discovery and a protected
+          device-to-device channel.
+        </p>
+        <p>
+          These sharing flows do not use Firebase or a Petit-operated synchronization backend.
+          Device names and technical pairing or group identifiers may be visible to nearby or
+          local-network devices during discovery. You decide when to pair devices and which
+          authorized devices participate.
+        </p>
+
+        <h2>4. Optional Google Drive backup</h2>
+        <p>
+          Google Drive backup is optional. When you connect Google Drive or start a backup, Petit
+          uses Google Identity Services to request only
+          <code>https://www.googleapis.com/auth/drive.appdata</code>. Petit does not request access
+          to your general Drive files. Backup archives are stored in the hidden
+          <code>appDataFolder</code> belonging to the Google account you authorize.
+        </p>
+        <p>
+          A backup may contain the restorable data and app-owned pet assets described above. Petit
+          excludes Google credentials, provider tokens, device pairing secrets, caches, and
+          WorkManager bookkeeping from the archive. Access tokens are kept in memory for provider
+          requests and are not stored in Petit databases, preferences, logs, or backup files.
+        </p>
+        <p>
+          Drive transfers go directly between the app and Google Drive API v3. Petit does not use
+          Firebase or a Petit-operated backend for this flow. Google processes the authorization
+          and stored backup under your Google account and Google's applicable terms and privacy
+          policy. Petit does not add end-to-end encryption to these archives; Google provides the
+          storage and transport protections for Drive.
+        </p>
+
+        <h2>5. Authorization, disconnecting, and remote deletion</h2>
+        <p>
+          You can disconnect Google Drive from Petit. Disconnecting revokes or removes the app's
+          authorization and cancels automatic backup work, but it does not automatically delete
+          backups already stored in your Google Drive <code>appDataFolder</code>. Logging out or
+          losing authorization is also not treated as a deletion request. Remote backups remain
+          until you explicitly delete them through an available Petit management action, remove
+          the app's hidden data through Google, or Google removes them under its own account and
+          retention rules.
+        </p>
+
+        <h2>6. Notifications</h2>
+        <p>
+          Reminder notifications are generated locally from your reminder data. If enabled,
+          backup notifications contain only operational status and non-clinical summary counts;
+          they do not include pet names, clinical values, access tokens, or backup contents.
+        </p>
+
+        <h2>7. Analytics, advertising, and sale of data</h2>
+        <p>
+          Petit does not include advertising SDKs, behavior-based tracking, or analytics services
+          in the current app, and it does not sell personal data. Google services are contacted
+          only for the optional Google-powered capabilities you choose, such as Nearby pairing or
+          Google Drive authorization and backup.
+        </p>
+
+        <h2>8. Retention, export, and deletion</h2>
+        <p>
+          Local data remains on your device until you delete records, use the app's delete-all-data
+          action, clear app storage, or uninstall the app, subject to Android platform behavior.
+          You control exported files, copies transferred to other devices, and remote Drive
+          backups. Deleting local data does not automatically erase copies that you previously
+          exported, shared, or backed up.
+        </p>
+
+        <h2>9. Security and your choices</h2>
+        <p>
+          Treat exported and backup files as sensitive because they may contain health and care
+          information. Keep your device, paired devices, and Google account protected. You can use
+          Petit entirely with local storage and decline optional pairing, local-network sharing,
+          notifications, and Google Drive authorization.
+        </p>
+
+        <h2>10. Children's privacy</h2>
+        <p>
+          Petit is a pet-care tool and is not directed to children under 13. If you believe
+          information was provided inappropriately, contact the project for guidance.
+        </p>
+
+        <h2>11. Open source</h2>
+        <p>
+          Petit is open-source software. Its source code is available at
+          <a href="https://github.com/petit-app/petit">github.com/petit-app/petit</a> under the GNU
+          Affero General Public License v3.0. The Petit name and brand assets are governed
+          separately by the repository's trademark policy.
+        </p>
+
+        <h2>12. Changes and contact</h2>
+        <p>
+          This policy may be updated when the app, its providers, or legal requirements change. The
+          effective date above identifies the current version. For privacy questions, open an
+          issue at
+          <a href="https://github.com/petit-app/petit/issues">github.com/petit-app/petit/issues</a>.
+          Because Petit does not operate an account or hosted data service for these flows, the
+          project maintainers generally cannot access or remotely delete data held only on your
+          device, another paired device, or your Google Drive account.
+        </p>
+      </article>
+
+      <article id="portugues" lang="pt-BR">
+        <h1>Política de Privacidade do Petit</h1>
+        <p class="meta"><strong>Data de vigência:</strong> 19 de julho de 2026</p>
+
+        <p>
+          O Petit é um aplicativo Android de código aberto para gerenciar informações de saúde e
+          cuidados de animais de estimação. Esta política explica quais dados o Petit processa,
+          para onde eles vão e quais escolhas estão disponíveis para você. O Petit não exige uma
+          conta Petit para os recursos descritos aqui.
+        </p>
+
+        <h2>1. Dados fornecidos por você e criados pelo aplicativo</h2>
+        <p>Dependendo dos recursos utilizados, o Petit pode processar:</p>
+        <ul>
+          <li>Perfis dos animais, incluindo nomes, espécies, observações e fotos do aplicativo.</li>
+          <li>Registros de peso, vacinação, vermifugação e outros cuidados.</li>
+          <li>Tarefas, lembretes, estado de conclusão e preferências de notificação.</li>
+          <li>
+            Preferências do aplicativo, configurações de backup e histórico não clínico do status
+            dos backups.
+          </li>
+          <li>
+            Identificadores de dispositivo, grupo familiar, pareamento e sincronização necessários
+            para o compartilhamento opcional entre dispositivos.
+          </li>
+        </ul>
+
+        <h2>2. Armazenamento local</h2>
+        <p>
+          O Petit prioriza o armazenamento local. O aplicativo armazena seus registros principais
+          em um banco de dados Room no dispositivo. Preferências e configurações operacionais são
+          armazenadas no Android DataStore ou no armazenamento privado do aplicativo, e fotos e
+          arquivos temporários controlados pelo app ficam em diretórios do dispositivo gerenciados
+          pelo aplicativo. O Petit não envia esses dados para um backend operado pelo Petit apenas
+          porque você usa o aplicativo.
+        </p>
+
+        <h2>3. Compartilhamento local e offline opcional</h2>
+        <p>
+          Se você escolher o pareamento, a transferência única ou a sincronização do grupo
+          familiar, o Petit enviará os dados restauráveis selecionados diretamente entre os
+          dispositivos por meio do Google Nearby Connections ou de uma conexão autenticada na
+          rede local. O Nearby Connections pode usar Bluetooth, Wi-Fi, Wi-Fi Direct e os Serviços
+          do Google Play para encontrar e conectar dispositivos próximos. A sincronização em rede
+          local usa descoberta na rede local e um canal protegido entre dispositivos.
+        </p>
+        <p>
+          Esses fluxos de compartilhamento não usam Firebase nem um backend de sincronização
+          operado pelo Petit. Nomes de dispositivos e identificadores técnicos de pareamento ou de
+          grupo podem ficar visíveis para dispositivos próximos ou na rede local durante a
+          descoberta. Você decide quando parear e quais dispositivos autorizados participam.
+        </p>
+
+        <h2>4. Backup opcional no Google Drive</h2>
+        <p>
+          O backup no Google Drive é opcional. Quando você conecta o Google Drive ou inicia um
+          backup, o Petit usa o Google Identity Services para solicitar somente
+          <code>https://www.googleapis.com/auth/drive.appdata</code>. O Petit não solicita acesso
+          aos seus arquivos gerais do Drive. Os arquivos de backup são armazenados no
+          <code>appDataFolder</code> oculto pertencente à conta Google que você autorizar.
+        </p>
+        <p>
+          Um backup pode conter os dados restauráveis e os arquivos dos animais descritos acima. O
+          Petit exclui do backup credenciais do Google, tokens do provedor, segredos de pareamento,
+          caches e informações internas do WorkManager. Os tokens de acesso são mantidos em memória
+          durante as solicitações ao provedor e não são armazenados nos bancos de dados,
+          preferências, logs ou arquivos de backup do Petit.
+        </p>
+        <p>
+          As transferências para o Drive ocorrem diretamente entre o aplicativo e a API Google
+          Drive v3. O Petit não usa Firebase nem um backend operado pelo Petit nesse fluxo. O Google
+          processa a autorização e o backup armazenado na sua conta Google conforme os termos e a
+          política de privacidade aplicáveis do Google. O Petit não adiciona criptografia de ponta
+          a ponta a esses arquivos; o Google fornece as proteções de armazenamento e transporte do
+          Drive.
+        </p>
+
+        <h2>5. Autorização, desconexão e exclusão remota</h2>
+        <p>
+          Você pode desconectar o Google Drive do Petit. A desconexão revoga ou remove a autorização
+          do aplicativo e cancela os backups automáticos, mas não exclui automaticamente os backups
+          já armazenados no <code>appDataFolder</code> do seu Google Drive. Sair da conta ou perder
+          a autorização também não é interpretado como um pedido de exclusão. Os backups remotos
+          permanecem até que você os exclua explicitamente por uma ação de gerenciamento disponível
+          no Petit, remova os dados ocultos do aplicativo pelo Google ou o Google os remova conforme
+          suas próprias regras de conta e retenção.
+        </p>
+
+        <h2>6. Notificações</h2>
+        <p>
+          As notificações de lembrete são geradas localmente a partir dos seus dados. Quando
+          habilitadas, as notificações de backup contêm somente o status operacional e contagens
+          resumidas não clínicas; elas não incluem nomes de animais, valores clínicos, tokens de
+          acesso ou o conteúdo do backup.
+        </p>
+
+        <h2>7. Análises, publicidade e venda de dados</h2>
+        <p>
+          O Petit não inclui SDKs de publicidade, rastreamento comportamental ou serviços de análise
+          na versão atual e não vende dados pessoais. Os serviços do Google são contatados somente
+          para os recursos opcionais do Google escolhidos por você, como o pareamento Nearby ou a
+          autorização e o backup no Google Drive.
+        </p>
+
+        <h2>8. Retenção, exportação e exclusão</h2>
+        <p>
+          Os dados locais permanecem no dispositivo até que você exclua registros, use a ação de
+          apagar todos os dados, limpe o armazenamento do aplicativo ou desinstale o app, sujeito ao
+          comportamento da plataforma Android. Você controla os arquivos exportados, as cópias
+          transferidas para outros dispositivos e os backups remotos no Drive. Excluir dados locais
+          não apaga automaticamente cópias que você tenha exportado, compartilhado ou salvo em
+          backup anteriormente.
+        </p>
+
+        <h2>9. Segurança e suas escolhas</h2>
+        <p>
+          Trate arquivos exportados e backups como dados sensíveis, pois eles podem conter
+          informações de saúde e cuidados. Proteja seu dispositivo, os dispositivos pareados e sua
+          conta Google. Você pode usar o Petit somente com armazenamento local e recusar o
+          pareamento opcional, o compartilhamento em rede local, as notificações e a autorização do
+          Google Drive.
+        </p>
+
+        <h2>10. Privacidade de crianças</h2>
+        <p>
+          O Petit é uma ferramenta para cuidados de animais e não é direcionado a crianças menores
+          de 13 anos. Se você acredita que alguma informação foi fornecida de forma inadequada,
+          entre em contato com o projeto para receber orientações.
+        </p>
+
+        <h2>11. Código aberto</h2>
+        <p>
+          O Petit é um software de código aberto. O código-fonte está disponível em
+          <a href="https://github.com/petit-app/petit">github.com/petit-app/petit</a> sob a GNU
+          Affero General Public License v3.0. O nome Petit e os elementos da marca são regidos
+          separadamente pela política de marcas do repositório.
+        </p>
+
+        <h2>12. Alterações e contato</h2>
+        <p>
+          Esta política pode ser atualizada quando o aplicativo, seus provedores ou os requisitos
+          legais mudarem. A data de vigência acima identifica a versão atual. Para dúvidas sobre
+          privacidade, abra uma issue em
+          <a href="https://github.com/petit-app/petit/issues">github.com/petit-app/petit/issues</a>.
+          Como o Petit não opera uma conta nem um serviço hospedado de dados para esses fluxos, os
+          mantenedores do projeto normalmente não conseguem acessar ou excluir remotamente dados
+          mantidos somente no seu dispositivo, em outro dispositivo pareado ou na sua conta do
+          Google Drive.
+        </p>
+      </article>
+    </main>
+  </body>
+</html>
