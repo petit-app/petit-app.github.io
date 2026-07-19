@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title description">
   <title id="title">Petit logo</title>
-  <desc id="description">A warm rounded mark with a heart-shaped paw</desc>
-  <defs>
-    <linearGradient id="background" x1="18" y1="14" x2="110" y2="116" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F06B62" />
-      <stop offset="1" stop-color="#B83F55" />
-    </linearGradient>
-  </defs>
-  <rect x="8" y="8" width="112" height="112" rx="34" fill="url(#background)" />
-  <circle cx="42" cy="45" r="10" fill="#FFF8F1" />
-  <circle cx="64" cy="36" r="10" fill="#FFF8F1" />
-  <circle cx="86" cy="45" r="10" fill="#FFF8F1" />
-  <path d="M64 99C45 86 34 76 34 64c0-9 7-16 16-16 6 0 11 3 14 8 3-5 8-8 14-8 9 0 16 7 16 16 0 12-11 22-30 35Z" fill="#FFF8F1" />
+  <desc id="description">An orbital path shaped like a lowercase p with diverse companion nodes</desc>
+  <rect x="8" y="8" width="112" height="112" rx="34" fill="#4A0D52" />
+  <path
+    d="M41 105V60c0-21 13-34 33-34 19 0 32 13 32 33S93 92 74 92c-13 0-23-6-29-16"
+    fill="none"
+    stroke="#FFF9F3"
+    stroke-width="15"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="94" cy="38" r="8" fill="#73C9B5" />
+  <rect x="93" y="73" width="14" height="14" rx="5" fill="#F3C969" transform="rotate(18 100 80)" />
 </svg>
