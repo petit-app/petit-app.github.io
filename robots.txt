@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://petit-app.github.io/sitemap.xml
+Sitemap: https://petit.woliveiras.com/sitemap.xml

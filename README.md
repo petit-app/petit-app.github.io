@@ -4,8 +4,8 @@ This repository hosts the public GitHub Pages website for [Petit](https://github
 
 ## Public pages
 
-- Website: <https://petit-app.github.io/>
-- Privacy policy: <https://petit-app.github.io/privacy-policy/>
+- Website: <https://petit.woliveiras.com/>
+- Privacy policy: <https://petit.woliveiras.com/privacy-policy/>
 
 ## Repository structure
 
@@ -21,7 +21,7 @@ Petit is local-first. Pet profiles, health records, tasks, reminders, preference
 
 Google Drive backup is optional and uses storage owned by the user. Petit requests only the `https://www.googleapis.com/auth/drive.appdata` scope and stores its backup archives in that user's hidden Google Drive `appDataFolder`. This flow does not use Firebase or a Petit-operated backend. Disconnecting Google Drive or revoking authorization stops Petit from accessing Drive but does not automatically delete backups already stored there.
 
-See the [privacy policy](https://petit-app.github.io/privacy-policy/) for the complete user-facing description.
+See the [privacy policy](https://petit.woliveiras.com/privacy-policy/) for the complete user-facing description.
 
 ## Local preview
 
